@@ -29,6 +29,7 @@
   | +--------------------+  +----------+      |
   +-------------------------------------------+
   ```
+<!--
 ### NFS
 - Install NFS server on another machine. In my case, I have installed NFS server on host OS (CentOS).
   ```
@@ -50,6 +51,7 @@
   | +--------------------+  +------------+    |
   +-------------------------------------------+
   ```
+-->
 ## Prerequisite
 - You need to install Helm. Please refer to [Setup Helm](https://github.com/EXPRESSCLUSTER/Helm/blob/master/SetupHelm.md).
 - You need to prepare some provision storage. In this article, we have used [Rook-Ceph](https://github.com/EXPRESSCLUSTER/Rook/blob/master/Rook-Ceph.md).
