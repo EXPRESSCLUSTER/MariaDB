@@ -148,6 +148,7 @@
    my-release-mariadb-galera-1   1/1     Running   0          115m
    my-release-mariadb-galera-2   1/1     Running   0          79m   
    ```
+
 <!--
 ## Deploy MariaDB Galera Cluster on NFS
 1. Add bitnami repository.
@@ -240,3 +241,19 @@
    $ helm install my-release -f ./values.yaml bitnami/mariadb-galera
    ```
 -->
+## Reference
+### CPU and Memory Usage
+#### Galera Cluster on Rook-Ceph 
+```sh
+$ kubectl top node
+NAME         CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
+ubuntu-205   378m         18%    1563Mi          54%
+ubuntu-206   338m         16%    1982Mi          68%
+ubuntu-207   372m         18%    2094Mi          72%
+ubuntu-208   367m         18%    2113Mi          73%
+$ kubectl top pod
+NAME                          CPU(cores)   MEMORY(bytes)
+my-release-mariadb-galera-0   10m          176Mi
+my-release-mariadb-galera-1   9m           206Mi
+my-release-mariadb-galera-2   7m           202Mi
+```
