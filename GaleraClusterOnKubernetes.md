@@ -151,6 +151,14 @@
    ```
 ## Reference
 ### CPU and Memory Usage
+#### Galera Cluster Pods
+```sh
+$ kubectl top pod
+NAME                          CPU(cores)   MEMORY(bytes)
+my-release-mariadb-galera-0   10m          176Mi
+my-release-mariadb-galera-1   9m           206Mi
+my-release-mariadb-galera-2   7m           202Mi
+```
 #### Galera Cluster on Rook-Ceph 
 ```sh
 $ kubectl top node
@@ -160,13 +168,6 @@ ubuntu-206   338m         16%    1982Mi          68%
 ubuntu-207   372m         18%    2094Mi          72%
 ubuntu-208   367m         18%    2113Mi          73%
 ```
-<!--
-$ kubectl top pod
-NAME                          CPU(cores)   MEMORY(bytes)
-my-release-mariadb-galera-0   10m          176Mi
-my-release-mariadb-galera-1   9m           206Mi
-my-release-mariadb-galera-2   7m           202Mi
--->
 #### Galera Cluster on Longhorn
 ```sh
 $ kubectl top node
