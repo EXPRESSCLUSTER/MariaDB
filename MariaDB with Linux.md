@@ -58,14 +58,14 @@ Procedure
     |name|failover1|
     |Startup Server| Server1 -> Server2 |
     |floating ip address|10.0.7.133|
-    |mirror disk resource (mount point))|/database|
+    |mirror disk resource (mount point)|/database|
     
     - In Config mode of the Cluster WebUI, add failover group to use Mariadb.  
       You need the following resources.
       - Floating ip resource  
       - Mirror disk resource
     
-     If want to know how to add the resource, please refer to "EXPRESSCLUSTER X 4.1/2/3 for Linux Installation and Configuration Guide". 
+     If want to know how to add the resource, please refer to "EXPRESSCLUSTER X 5.1 for Linux Installation and Configuration Guide". 
      After you add failover group and execute apply the configuration file, you start failover group by server1.  
      
 2. Install Mariadb on both servers 
@@ -127,7 +127,7 @@ Procedure
           > socket=/database/mysql/mysql.sock  
 
 
-      - Configure the MySQL Client Configuration file (/etc/my.cnf.d/client.cnf).
+      - Configure the MariaDB Client Configuration file (/etc/my.cnf.d/client.cnf).
           > [client]
 
           > port=3306
@@ -182,7 +182,7 @@ Procedure
       [root@rhel131 /]# systemctl stop mariadb
       [root@rhel131 /]# umount /database
       ```   
-6. MySQL Setup (Node2)
+6. MariaDB Setup (Node2)
 
     You must move failover group on the Node2. Configure Mariadb on the Node2.
     - Start Mariadb service
@@ -225,7 +225,7 @@ Procedure
  
       - Add the exec resource and configure. 
        
-        In Config mode of the Cluster WebUI, Add the exec resource to control MySQL.  
+        In Config mode of the Cluster WebUI, Add the exec resource to control MariaDB.  
           - Configure the start.sh and stop.sh
             -  In the case of start.sh -> Immediately after "$CLP_DISK" = "SUCCESS", add the "systemctl start mariadb.service"
             -  In the case of stop.sh  -> Immediately after "$CLP_DISK" = "SUCCESS", add the "systemctl stop mariadb.service"
