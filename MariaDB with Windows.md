@@ -8,9 +8,9 @@ This guide describes how to setup MariaDB with EXPRESSCLUSTER X 5.1.
 For the detailed information of EXPRESSCLUSTER X, please refer to [this site](https://www.nec.com/en/global/prod/expresscluster/index.html) .
 
 
-## **System Overview**
+## **System overview**
 
-### **System Requirement**
+### **System requirement**
 - 2 servers
   - IP reachable each other
   - Having mirror disk
@@ -20,7 +20,7 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
     - Data partition size depends on Database sizing.
 - MariaDB Database are installed on local partition on each server.
 
-### **System Configuration**
+### **System configuration**
 - Windows Server 2022 Standard
 - MariaDB 10.11.4
 - EXPRESSCLUSTER X 5.1
@@ -49,7 +49,7 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
 		 |  | - MariaDB10.11.4         |
 		 |  | - EXPRESSCLUSTER X 5.1   |
 		 |  | IP Address:10.0.7.181    |
-         |  | RAM   : 4GB              |
+                 |  | RAM   : 4GB              |
 		 |  | Disk 0: 40GB OS          |
 		 |  |      C: local partition  |
 		 |  | Disk 1: 30GB mirror disk |
@@ -75,7 +75,7 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
 	    - userw             : user-mode monitor resource
 
 
-## **Basic cluster setup on Primary and Secondary servers**
+## **Basic cluster setup on primary and pecondary servers**
 
 
  ### **1. Install EXPRESSCLUSTER X (ECX)**
@@ -91,7 +91,7 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
         fip: floating IP resource
         md : mirror disk resource
         
-### **4. Start group on Primary server**
+### **4. Start failover groupon primary server**
 
       
        +----------------------+-----------------------------+
@@ -107,13 +107,13 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
 
  After you add failover group, execute and apply the configuration file, you start failover group by noimariawdb01.  
      
-### **5. Install MariaDB on both servers**
+### **5. Install mariaDB on both servers**
 
 - Install MariaDB 10.11.4 on both the servers.
     
     - For installation procedure please refer to [this site](https://www.mariadbtutorial.com/getting-started/install-mariadb/ ).
 
-### Install MariaDB on both servers
+### Install mariaDB on both servers
 
 
 1. Login as an user with Administrator privilege and Execute the .msi file on the server.
@@ -130,20 +130,20 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
 1. Completing the MariaDB Setup Wizard
     - please keep it checked and click **Finish**.
 
-### **6. Configure MariaDB Database in Mirror drive (Node1)**
+### **6. Configure mariaDB database path in mirror drive (Node1)**
 
 - Create the database directory in mirror drive e.g. D:\MariaDB
 - Stop MariaDB service from services.msc.
 - Copy MariaDB data from default directory (C:\Program Files\MariaDB 10.11\data) to Mirror disk (D:\MariaDB)
 - Right Click on the newly created folder and make sure that it has all type permissions for local MongoDB system user.      
 
-### **7. Perform below steps on both the Nodes one by one after group failover move.**
+### **7. Perform below steps on both the nodes one by one after group failover move.**
  - Open the configuration file in a text editor and modify the MariaDB configuration file with storage location.
  - Configure the MariaDB Configuration file (C:\Program Files\MariaDB 10.11\data\my.ini).
     > [mysqld]
     > datadir=D:\MariaDB\data
           
-### **8. Testing Of MariaDB Database on ECX Cluster**
+### **8. Testing Of mariaDB database on ECX cluster**
 
 - MariaDB Setup (Node1)
         
@@ -179,7 +179,7 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
 ```         
  
             
-- **Create Database in MySql 8.0 Client Line for testing database on Node1.**
+- **Create Database in MySql 8.0 client line for testing database on node1.**
 
  ```
     MariaDB [(none)]> create database test2;
@@ -237,7 +237,7 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
 
 
 
-### **9. You have to move failover group on the Node2 for testing MariaDB database failover.**
+### **9. You have to move failover group on the node2 for testing MariaDB database failover.**
 
          
 - Check and Confirm the database on MariaDB which we have created on node1.
@@ -259,7 +259,7 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
    - The data is replicated from primary to secondary server successfully.   
 
     
-### **10. Change the startup type of MariaDB Service (Node1 & Node2)**
+### **10. Change the startup type of MariaDB service (node1 & node2)**
 
 - Open the Windows Service Manager     
   - On Command Prompt
