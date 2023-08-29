@@ -49,7 +49,7 @@ For the detailed information of EXPRESSCLUSTER X, please refer to [this site](ht
 		 |  | - MariaDB10.11.4         |
 		 |  | - EXPRESSCLUSTER X 5.1   |
 		 |  | IP Address:10.0.7.181    |
-                 |  | RAM   : 4GB              |
+		 |  | RAM   : 4GB              |
 		 |  | Disk 0: 40GB OS          |
 		 |  |      C: local partition  |
 		 |  | Disk 1: 30GB mirror disk |
