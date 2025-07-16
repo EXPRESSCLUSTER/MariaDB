@@ -3,18 +3,18 @@ MARIADB with EXPRESSCLUSTER X on Linux
 
 About this guide
 ---
-This guide describes how to setup Mariadb with EXPRESSCLUSTER X. 
+This guide describes how to setup MariaDB with EXPRESSCLUSTER X. 
 For the detailed information of EXPRESSCLUSTER X, please refer to [this site](https://www.nec.com/en/global/prod/expresscluster/index.html) .
 
 
 Configuration
 ---
 In this setup, create 2 nodes (Node1 and Node2 as below) mirror disk type cluster.
-Achieving Mariadb high availability By using EXPRESSCLUSTER X. 
+Achieving MariaDB high availability By using EXPRESSCLUSTER X. 
 
 ### Software versions
 - Red Hat Enterprise Linux release 9.0 (Plow)
-- Mariadb 11.0(internal version:11.0.3)            
+- MariaDB 11.0(internal version:11.0.3)            
 - EXPRESSCLUSTER X 5.1 for Linux
 - EXPRESSCLUSTER X Replicator for Linux
 - EXPRESSCLUSTER X Database Agent for Linux
@@ -31,9 +31,9 @@ Achieving Mariadb high availability By using EXPRESSCLUSTER X.
   - mirror disk monitor resource
   - mariadb monitor resource
 
-Mariadb setup
+MariaDB setup
 ---
-Please note that the following points are different if you set Mariadb to EXPRESSCLUSTER.
+Please note that the following points are different if you set MariaDB to EXPRESSCLUSTER.
 - database have to create Mirror disk that managed by EXPRESSCLUSTER.
   You must set only active server if you create database and database cluster.
 
@@ -60,7 +60,7 @@ Procedure
     |floating ip address|10.0.7.133|
     |mirror disk resource (mount point)|/database|
     
-    - In Config mode of the Cluster WebUI, add failover group to use Mariadb.  
+    - In Config mode of the Cluster WebUI, add failover group to use MariaDB.  
       You need the following resources.
       - Floating ip resource  
       - Mirror disk resource
@@ -68,9 +68,9 @@ Procedure
      If want to know how to add the resource, please refer to "EXPRESSCLUSTER X 5.1 for Linux Installation and Configuration Guide". 
      After you add failover group and execute apply the configuration file, you start failover group by server1.  
      
-2. Install Mariadb on both servers 
+2. Install MariaDB on both servers 
 
-     Note :- Download Mariadb Community Server for RHEL9 from: [This site](https://dlm.mariadb.com/3405904/MariaDB/mariadb-11.1.2/yum/centos/mariadb-11.1.2-rhel-7-x86_64-rpms.tar) 
+     Note :- Download MariaDB Community Server for RHEL9 from: [This site](https://dlm.mariadb.com/3405904/MariaDB/mariadb-11.1.2/yum/centos/mariadb-11.1.2-rhel-7-x86_64-rpms.tar) 
 
     - Unzip Downloaded Tar File **mariadb-11.0.3-rhel-9-x86_64-rpms.tar**
       ```
@@ -83,18 +83,18 @@ Procedure
       [root@rhel131 mariadb-11.0.3-rhel-9-x86_64-rpms]# chmod +x setup_repository
       ```
 
-    - By Executing the Setup_repository Script, this will add Mariadb repository on "/etc/yum.repos.d/mariadb.repo"
+    - By Executing the Setup_repository Script, this will add MariaDB repository on "/etc/yum.repos.d/mariadb.repo"
 
       ```
       [root@rhel131 mariadb-11.0.3-rhel-9-x86_64-rpms]# ./setup_repository
       ```
 
-    - After adding Mariadb Repository install Mariadb with Yum utility
+    - After adding MariaDB Repository install MariaDB with Yum utility
 
       ```
       [root@rhel131 /]# yum install mariaDB-mariadb-server.x86_64
-      [root@rhel131 /]# systemctl start Mariadb.service
-      [root@rhel131 /]# systemctl status Mariadb.service
+      [root@rhel131 /]# systemctl start mariadb.service
+      [root@rhel131 /]# systemctl status mariadb.service
       ```
 
     - Configure the root account
@@ -102,14 +102,14 @@ Procedure
       [root@rhel131 /]# mysql_secure_installation
       ```   
         
-3. Mariadb Configuration for Mirror disk (Node1)
+3. MariaDB Configuration for Mirror disk (Node1)
 
     - Create the database directory and mount it with data partition /dev/sdb1
       ```
       [root@rhel131 /]# mkdir database
       [root@rhel131 /]# mount /dev/sdb1 /database
       ```
-    - Coping Mariadb data from default location to Mirror Disk.
+    - Copying MariaDB data from default location to Mirror Disk.
     
       - systemctl status mariadb
       - systemctl stop mariadb
@@ -119,24 +119,23 @@ Procedure
 4. Perform the below steps on both the Nodes.
   
         
-      - Configure the Mariadb Configuration file (/etc/my.cnf.d/mysql-server.cnf) with your favourite editor
-          > [mariadb]
-
-          > datadir=/database/mysql
-          
-          > socket=/database/mysql/mysql.sock  
-
+      - Configure the MariaDB Configuration file (/etc/my.cnf.d/mysql-server.cnf) with your favourite editor
+          ```
+          [mariadb]
+          datadir=/database/mysql
+          socket=/database/mysql/mysql.sock
+          ```
 
       - Configure the MariaDB Client Configuration file (/etc/my.cnf.d/client.cnf).
-          > [client]
-
-          > port=3306
-          
-          > socket=/database/mysql/mysql.sock
+          ```
+          [client]
+          port=3306
+          socket=/database/mysql/mysql.sock
+          ```
         
         - No other configuration required.        
      
-5. Mariadb Setup (Node1)
+5. MariaDB Setup (Node1)
         
     - Run the Maridb service.
       ```
@@ -172,26 +171,26 @@ Procedure
       +------+---------+
       | id   | name    |
       +------+---------+
-      |    1 | Harsh   |
+      |    1 | Naruto  |
       |    2 | uzumaki |
       +------+---------+
       2 rows in set (0.001 sec)
       ```
-    - Stop Mariadb service and umount /dev/sdb1 data partition
+    - Stop MariaDB service and umount /dev/sdb1 data partition
       ```
       [root@rhel131 /]# systemctl stop mariadb
       [root@rhel131 /]# umount /database
       ```   
 6. MariaDB Setup (Node2)
 
-    You must move failover group on the Node2. Configure Mariadb on the Node2.
-    - Start Mariadb service
+    You must move failover group on the Node2. Configure MariaDB on the Node2.
+    - Start MariaDB service
       ```
-      [root@rhel131 /]# systemctl start mariadb
+      [root@rhel132 /]# systemctl start mariadb
       ```
     - Confirm the created Database
       ```
-      [root@rhel131 /]# - sudo mariadb
+      [root@rhel132 /]# - sudo mariadb
       MariaDB [(none)]> show databases;
       +--------------------+
       | Database           |
@@ -206,19 +205,19 @@ Procedure
       ``` 
     - Confirm the created table
       ```
-      MariaDB [db_test]> use db_test;
+      MariaDB [(none)]> use db_test;
       MariaDB [db_test]> select * from user;
       +------+---------+
       | id   | name    |
       +------+---------+
-      |    1 | Harsh   |
+      |    1 | Naruto  |
       |    2 | uzumaki |
       +------+---------+
       2 rows in set (0.001 sec)
       ```
-    - Stop Mariadb service
+    - Stop MariaDB service
       ```
-      [root@rhel131 /]# systemctl stop mariadb
+      [root@rhel132 /]# systemctl stop mariadb
       ```
 
  7. Configure the EXPRESSCLUSTER
@@ -230,7 +229,7 @@ Procedure
             -  In the case of start.sh -> Immediately after "$CLP_DISK" = "SUCCESS", add the "systemctl start mariadb.service"
             -  In the case of stop.sh  -> Immediately after "$CLP_DISK" = "SUCCESS", add the "systemctl stop mariadb.service"
            
-      - Add the Mariadb monitor resource
+      - Add the MariaDB monitor resource
           - Configure the following parameters
 
               |parameter|value|
